@@ -11,47 +11,19 @@
     <title>Login</title>
 </head>
 <body>
-    <header>
 
-        <div class="menu container">
-            <a href="#" class="logo">Logo</a>
-            <input type="checkbox" id="menu">
-            <label for="menu"><img src="../img/menuh.png" alt="" width="60px"></label>
-            <nav class="navbar">
-                    <ul>
-                        <li class="corner-item"><a href="index.html">Inicio</a></li>
-                        <li class="corner-item"><a href="logup.html">Registrarse</a></li>
-                        <li class="corner-item"><a href="loguin.html">Iniciar sesión</a></li>
-
-                    </ul>
-            
-            </nav>
-            <div >
-                <ul style="display: flex;">
-                    <li class="sudmenu">
-                        <img src="../img/carrito.png" id="img-carrito" width="50">
-                        
-                        <div id="carrito">
-                            <table id="lista-carrito">
-                                <thead>
-                                    <tr>
-                                        <th>Imagen</th>
-                                        <th>Nombre</th>
-                                        <th>Precio</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                            <a href="#" id="vaciar-carrito" class="btn-3">Vaciar carrito</a>
-                        </div>
-                    </li>
-                     <li class="sudmenu"><a href=""><img src="../img/user.png" id="img-carrito" width="41px"></a>
-                    </li>
-            </ul>
-            </div>
-            
-        </div>
-    </header>
+    <div id="contenido-externo"></div>
+<script>
+  const divContenido = document.getElementById('contenido-externo');
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', 'navlog.html', true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      divContenido.innerHTML = xhr.responseText;
+    }
+  };
+  xhr.send();
+</script>
     <section class="loguin">
         <div class="contenedor">
             <div class="formulario">
@@ -69,6 +41,9 @@
                         <label for="#">Contraseña</label>
                     </div>
                 </form>
+                <a href=""><h5>¿Olvidaste tu contraseña?</h5></a>
+                <a href="logup.html"><h5>¿Aún no tienes cuenta? (Regístrate)</h5></a>
+
                 <div>
                     <button class="boton">Acceder</button>
 
@@ -76,9 +51,20 @@
             </div>
         </div>
     </section>
-    <footer class="footer container" >
-    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="../js/script.js"></script>
 </body>
+<div id="contenido-footer"></div>
+<script>
+ const divContenido = document.getElementById('contenido-footer');
+ const xhr = new XMLHttpRequest();
+ xhr.open('GET', 'footer.html', true);
+ xhr.onreadystatechange = function () {
+   if (xhr.readyState === 4 && xhr.status === 200) {
+     divContenido.innerHTML = xhr.responseText;
+   }
+ };
+ xhr.send();
+</script>
 </html>
