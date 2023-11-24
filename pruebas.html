@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iteración sobre archivos</title>
+    <!-- Agrega aquí tus estilos de Swiper -->
+    <link rel="stylesheet" href="ruta/a/tu/estilo-de-swiper.css">
+</head>
+<body>
+
+    <div class="swiper-slide" id="productosSwiper"></div>
+
+    <script>
+        // Ruta del archivo JSON
+        const archivoJSON = "JSON/productos.json";
+
+        // Realizar la solicitud HTTP para obtener el archivo JSON
+        fetch(archivoJSON)
+            .then(response => response.json())
+            .then(data => {
+                // Referencia al contenedor de productos
+                const productosContainer = document.getElementById("productosSwiper");
+
+                // Iterar sobre el array de objetos
+                data.forEach(archivo => {
+                    // Verificar si el archivo tiene una imagen
+                    if (archivo.img !== "") {
+                        // Crear el HTML para el producto y agregarlo al contenedor
+                        productosContainer.innerHTML += `
+                            <div class="product">
+                                <div class="product-img">
+                                    <img src="${archivo.img}" alt="${archivo.nombre}">
+                                </div>
+                                <div class="product-txt">
+                                    <h4>${archivo.nombre}</h4>
+                                    <p>${archivo.descripcion}</p>
+                                    <span class="price">$${archivo.precio}</span>
+                                    <a href="loguin.html" class="agregar-carrito btn-1" data-id="${archivo.id}">Añadir</a>
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+
+                // Configurar Swiper después de agregar todos los productos
+                const swiper = new Swiper('.swiper-container', {
+                    // Configuración de Swiper
+                    // ...
+                });
+            })
+            .catch(error => console.error('Error al cargar el archivo JSON:', error));
+    </script>
+
+    <!-- Agrega aquí tu script de Swiper -->
+    <script src="ruta/a/tu/script-de-swiper.js"></script>
+
+</body>
+</html>

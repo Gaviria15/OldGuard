@@ -121,6 +121,14 @@ th, td{
     color: #fff;
     font-weight: 800;
 }
+.añadir{
+    background-color: #ff4e4e;
+    border-radius: 100%;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 800;
+}
 
 /*Search*/
 .divbuscar{
@@ -272,6 +280,19 @@ margin-left: 30%;
 .btn-3:hover{
     background-color: red;
 }
+
+
+.btn-4{
+display: inline-block;
+padding: 10px 25px;
+font-size: 14px;
+color: aliceblue;
+font-weight: 800;
+border-radius: 25px;
+margin-top: 15px;
+margin-left: 30%;
+}
+
 .slider-img {
     width: 50%;
 }
@@ -557,6 +578,14 @@ margin-left: 30%;
     background: url(../img/fondo.jpg)no-repeat;
     background-position: center;
     background-size: cover;
+}.producto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    background-position: center;
+    background-size: cover;
 }
 #loguinid{
     display: flex;
@@ -668,3 +697,33 @@ i{
     top: 19px;
     right: 0;
 }
+
+
+/* Estilos del modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000; /* Ajusta el z-index para que la modal esté por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+
+  
+  .cerrar-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .cerrar-modal:hover,
+  .cerrar-modal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  

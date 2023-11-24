@@ -57,12 +57,12 @@
 </body>
 <div id="contenido-footer"></div>
 <script>
- const divContenido = document.getElementById('contenido-footer');
+ const divfooter = document.getElementById('contenido-footer');
  const xhr = new XMLHttpRequest();
  xhr.open('GET', 'footer.html', true);
  xhr.onreadystatechange = function () {
    if (xhr.readyState === 4 && xhr.status === 200) {
-     divContenido.innerHTML = xhr.responseText;
+    divfooter.innerHTML = xhr.responseText;
    }
  };
  xhr.send();

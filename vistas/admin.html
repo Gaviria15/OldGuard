@@ -49,6 +49,7 @@
                                     </thead>
                                     <tbody></tbody>
                                 </table>
+                                <a id="total" class="btn-4"></a>
                                 <a href="#" id="vaciar-carrito" class="btn-3">Vaciar carrito</a>
                             </div>
                         </li>
@@ -73,235 +74,123 @@
             </div>
     </header>
 
-   
+    <h1>Listado de Productos</h1>
+
+    <ul id="productos-lista"></ul>
+  
+    <button class="btn-3" id="abrir-modal">Agregar Producto</button>
+  
+    <!-- Modal -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="cerrar-modal" id="cerrar-modal">&times;</span>
+        <section class="producto">
+            <div class="contenedor">
+                <div class="formulario">
+                    <form action="agregarproducto.php" method="post" enctype="multipart/form-data">
+                        <h2>Agregar Producto</h2>
+    
+                        <div class="input-contened">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="text" name="nombre" required>
+                            <label for="#">Nombre</label>
+                        </div>
+                        <div class="input-contened">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="text" name="descripcion" required>
+                            <label for="#">Descripción</label>
+                        </div>
+                        <div class="input-contened">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="number" name="precio" required>
+                            <label for="#">Precio</label>
+                        </div>
+                        <div class="input-contened">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="file" id="imagen" name="imagen" accept="image/*">
+                            <label for="#">Imagen</label>
+                        </div>
+                        <button class="boton" type="submit">Acceder</button>
+
+                    </form>    
+                    <div>
+    
+                    </div>
+                </div>
+            </div>
+        </section>ype="number" id="precio" step="0.01" required>
+  
+          <button type="button" onclick="agregarProducto()">Agregar Producto</button>
+        </form>
+      </div>
+    </div>
+  
+
                                
-    <main class="products" >
-        <div class="tabs container" >
-    
-            <input type="radio" name="tabs" id="tab1" checked="checked" class="tabInput" value="1">
-            <label for="tab1" >God of war</label>
-    
+    <main class="products">
+        <div class="tabs container">
+
+            <input type="radio" name="tabs" id="tab1" checked="checked"
+                class="tabInput" value="1">
+            <label for="tab1">God of war</label>
+
             <div class="tab" id="lista-1">
                 <div class="swiper mySwiper-2" id="swiper1">
-                    <div class="swiper-wrapper">
-    
-                        <div class="swiper-slide">
-                            <div class="product">
-                                <div class="product-img">
-                                   
-                                    <img src="../img/kratos3.png" alt="">
-                                </div>
-                                <div class="product-txt">
-                                    <h4>Kratos humilde</h4>
-                                    <p>Calidad premium</p>
-                                    <span class="price">$20000</span>
-                                    <a href="#" class="agregar-carrito btn-1" data-id="1">añadir</a>
-                                </div>
+                    <div class="swiper-wrapper" id="productosSwiper">
+
+                        <script>
+    // Ruta del archivo JSON
+    const archivoJSON = "../JSON/productos.json";
+
+    // Realizar la solicitud HTTP para obtener el archivo JSON
+    fetch(archivoJSON)
+        .then(response => response.json())
+        .then(data => {
+            // Referencia al contenedor de productos
+            const productosContainer = document.getElementById("productosSwiper");
+
+            // Iterar sobre el array de objetos
+            data.forEach(archivo => {
+                // Verificar si el archivo tiene una imagen
+                if (archivo.img !== "") {
+                    // Crear el HTML para el producto y agregarlo al contenedor
+                    productosContainer.innerHTML += `
+                <div class="swiper-slide" >
+                        <div class="product">
+                            <div class="product-img">
+                                <img src="${archivo.img}" alt="${archivo.nombre}">
+                            </div>
+                            <div class="product-txt">
+                                <h4>${archivo.nombre}</h4>
+                                <p>${archivo.descripcion}</p>
+                                <span class="price">$${archivo.precio}</span>
+                                <a href="loguin.html" class="agregar-carrito btn-1" data-id="${archivo.id}">Añadir</a>
                             </div>
                         </div>
-                        <div class="swiper-slide">
-                            <div class="product">
-                                <div class="product-img">
-                                    <img src="../img/kratos6.png" alt>
-                                </div>
-                                <div class="product-txt">
-                                    <h4>Kratos papá</h4>
-                                    <p>Calidad premium</p>
-                                    <span class="price">$20000</span>
-                                    <a href="#" class="agregar-carrito btn-1" data-id="2">añadir</a>
-    
-                                </div>
-                            </div>
                         </div>
-    
-                        <div class="swiper-slide">
-                            <div class="product">
-                                <div class="product-img">
-                                    <img src="../img/kratos4.png" alt="">
-                                </div>
-                                <div class="product-txt">
-                                    <h4>Kratos ejecutivo</h4>
-                                    <p>Calida primium</p>
-                                    <span class="price">$20000</span>
-                                    <a href="#" class="agregar-carrito btn-1" data-id="3">añadir</a>
-    
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="swiper-slide">
-                            <div class="product">
-                                <div class="product-img">
-                                    <img src="../img/kratos5.png" alt="">
-                                </div>
-                                <div class="product-txt">
-                                    <h4>Kratos balboa</h4>
-                                    <p>Calida primium</p>
-                                    <span class="price">$20000</span>
-                                    <a href="#" class="agregar-carrito btn-1" data-id="4">añadir</a>
-    
-                                </div>
-                            </div>
-                        </div>
-    
+                    `;
+                }
+            });
+
+            // Configurar Swiper después de agregar todos los productos
+            const swiper = new Swiper('.swiper-container', {
+                // Configuración de Swiper
+                // ...
+            });
+        })
+        .catch(error => console.error('Error al cargar el archivo JSON:', error));
+</script>
+
                     </div>
                     <div class="swiper-button-next"></div>
                     <div class="swiper-button-prev"></div>
                 </div>
             </div>
-    
-            <input type="radio" name="tabs" id="tab2" checked="checked" class="tabInput" value="2">
-            <label for="tab2" >Dragón ball z</label>
-    
-            <div class="tab" id="lista-2" >
-                <div class="swiper mySwiper-2" id="swiper1">
-                    <div class="swiper-wrapper">
-    
-                        <div class="swiper-slide" >
-                            <div class="product">
-                                <div class="product-img">
-                                    <img
-                                        src="../img/goku.png"
-                                        alt>
-                                </div>
-                                    <div class="product-txt">
-                                        <h4>Goku baby</h4>
-                                        <p>Calidad premium</p>
-                                        <span class="price">$20000</span>
-                                    <a href="#" class="agregar-carrito btn-1" data-id="5">añadir</a>
-    
-                                    </div>
-                            </div>
-                        </div>
-    
-                        <div class="swiper-slide">
-                            <div class="product">
-                                <div class="product-img">
-                                    <img src="../img/goku1.png" alt>
-                                </div>
-                                    <div class="product-txt">
-                                        <h4>Goku</h4>
-                                        <p>Calidad premium</p>
-                                        <span class="price">$20000</span>
-                                    <a href="#" class="agregar-carrito btn-1" data-id="6">añadir</a>
-    
-                                    </div>
-                            </div>
-                        </div>
-    
-                        <div class="swiper-slide">
-                            <div class="product">
-                                <div class="product-img">
-                                    <img src="../img/maestroroshi.png" alt="">
-                                </div>
-                                <div class="product-txt">
-                                    <h4>Maestro Roshi</h4>
-                                    <p>Calida primium</p>
-                                    <span class="price">$20000</span>
-                                    <a href="#" class="agregar-carrito btn-1" data-id="7">añadir</a>
-    
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="swiper-slide">
-                            <div class="product">
-                                <div class="product-img">
-                                    <img src="../img/boo.png" alt="">
-                                </div>
-                                <div class="product-txt">
-                                    <h4>Boo</h4>
-                                    <p>Calida primium</p>
-                                    <span class="price">$20000</span>
-                                    <a href="#" class="agregar-carrito btn-1" data-id="8">añadir</a>
-    
-                                </div>
-                            </div>
-                        </div>
-    
-                        <div class="swiper-slide">
-                            <div class="product">
-                                <div class="product-img">
-                                    <img src="../img/freazer.png" alt="">
-                                </div>
-                                <div class="product-txt">
-                                    <h4>Freezer</h4>
-                                    <p>Calida primium</p>
-                                    <span class="price">$20000/span>
-                                    <a href="#" class="agregar-carrito btn-1" data-id="9">añadir</a>
-    
-                                </div>
-                            </div>
-                        </div>
-    
-                    </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
+
+
+
             </div>
-    
-            <input type="radio" name="tabs" id="tab3" checked="checked" class="tabInput" value="3">
-            <label for="tab3" >the seven deadly sins</label>
-    
-            <div class="tab" id="lista-3">
-                <div class="swiper mySwiper-2" id="swiper1">
-                    <div class="swiper-wrapper">
-    
-                        <div class="swiper-slide">
-                            <div class="product">
-                                <div class="product-img">
-                                    <img
-                                        src="../img/dan.png"
-                                        alt>
-                                </div>
-                                    <div class="product-txt">
-                                        <h4>Dan</h4>
-                                        <p>Calidad premium</p>
-                                        <span class="price">$20000</span>
-                                    <a href="#" class="agregar-carrito btn-1" data-id="10">añadir</a>
-    
-                                    </div>
-                            </div>
-                        </div>
-    
-                        <div class="swiper-slide">
-                            <div class="product">
-                                <div class="product-img">
-                                    <img src="../img/diana.png" alt>
-                                </div>
-                                    <div class="product-txt">
-                                        <h4>Diana</h4>
-                                        <p>Calidad premium</p>
-                                        <span class="price">$20000</span>
-                                    <a href="#" class="agregar-carrito btn-1" data-id="11">añadir</a>
-    
-                                    </div>
-                            </div>
-                        </div>
-    
-                        <div class="swiper-slide">
-                            <div class="product">
-                                <div class="product-img">
-                                    <img src="../img/meliodas.png" alt>
-                                </div>
-                                    <div class="product-txt">
-                                        <h4>Meliodas</h4>
-                                        <p>Calidad premium</p>
-                                        <span class="price">$20000</span>
-                                    <a href="#" class="agregar-carrito btn-1" data-id="12">añadir</a>
-    
-                                    </div>
-                            </div>
-                        </div>
-    
-                    </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
-            </div>
-    
-        </div>
-    </main>
+        </main>
     
         <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
         <script src="../js/script.js"></script>
